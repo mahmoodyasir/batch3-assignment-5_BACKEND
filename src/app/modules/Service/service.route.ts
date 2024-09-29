@@ -16,7 +16,7 @@ router.post('/',
 
 router.get('/:id', ServiceControllers.getSingleService);
 
-router.get('/', ServiceControllers.getAllService);
+router.post('/all', ServiceControllers.getAllService);
 
 router.put('/:id',
     auth(USER_ROLE.admin),

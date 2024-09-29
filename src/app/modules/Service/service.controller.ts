@@ -33,8 +33,18 @@ const getSingleService = catchAsync(async (req, res) => {
 
 const getAllService = catchAsync(async (req, res) => {
 
+    const { search, minPrice, maxPrice, minDuration, maxDuration, sortBy } = req.body;
 
-    const result = await ServiceOfServices.getAllServiceFromDB();
+    const filterOptions = {
+        search: search || '',
+        minPrice: minPrice || undefined,
+        maxPrice: maxPrice || undefined,
+        minDuration: minDuration || undefined,
+        maxDuration: maxDuration || undefined,
+        sortBy: sortBy || undefined,
+    };
+
+    const result = await ServiceOfServices.getAllServiceFromDB(filterOptions);
 
     sendResponse(res, {
         statusCode: httpStatus.OK,
@@ -46,7 +56,7 @@ const getAllService = catchAsync(async (req, res) => {
 
 
 const updateService = catchAsync(async (req, res) => {
-    
+
     const id = req.params.id;
     const updatableData = req.body;
 
@@ -63,7 +73,7 @@ const updateService = catchAsync(async (req, res) => {
 
 
 const deleteService = catchAsync(async (req, res) => {
-    
+
     const id = req.params.id;
 
     const result = await ServiceOfServices.deleteServiceFromDB(id);
