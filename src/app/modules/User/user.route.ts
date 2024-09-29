@@ -15,7 +15,7 @@ router.post('/login',
     validateRequest(UserValidation.loginDataValidationSchema),
     UserControllers.userLogin);
 
-router.post('/fetchUser',
+router.get('/fetchUser',
     UserControllers.getUser);
 
 
