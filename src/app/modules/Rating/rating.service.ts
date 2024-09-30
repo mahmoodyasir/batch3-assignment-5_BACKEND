@@ -24,7 +24,7 @@ const createRatingIntoDB = async (email: string, payload: Partial<TRating>) => {
 
 const getRatingFromDB = async () => {
 
-    const response = await Rating.find().populate([
+    const response = await Rating.find().sort({ createdAt: -1 }).populate([
         {
             path: 'user',
             select: '-__v'

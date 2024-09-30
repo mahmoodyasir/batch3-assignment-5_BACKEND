@@ -8,7 +8,7 @@ const router = express.Router();
 
 router.post('/create-rating', auth(USER_ROLE.user), RatingControllers.createRating);
 
-router.get('/get-rating', auth(USER_ROLE.user), RatingControllers.getAllRating);
+router.get('/get-rating', RatingControllers.getAllRating);
 
 
 
