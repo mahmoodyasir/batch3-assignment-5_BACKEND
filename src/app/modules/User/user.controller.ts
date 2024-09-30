@@ -46,9 +46,28 @@ const getUser = catchAsync(async (req, res) => {
     })
 });
 
+const updateUser = catchAsync(async (req, res) => {
+
+    const bearerToken = req.headers.authorization;
+
+    const token = bearerToken?.split(' ')[1];
+    const updatableData = req.body;
+
+    const result = await UserServices.updateUserToDB(token as string, updatableData);
+
+    sendResponse(res, {
+        statusCode: httpStatus.OK,
+        success: true,
+        message: "User updated successfully",
+        data: result
+    });
+
+});
+
 
 export const UserControllers = {
     userSignUp,
     userLogin,
     getUser,
+    updateUser,
 }

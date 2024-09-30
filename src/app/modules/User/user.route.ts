@@ -15,6 +15,10 @@ router.post('/login',
     validateRequest(UserValidation.loginDataValidationSchema),
     UserControllers.userLogin);
 
+router.post('/update',
+    validateRequest(UserValidation.userUpdateValidationSchema),
+    UserControllers.updateUser);
+
 router.get('/fetchUser',
     UserControllers.getUser);
 

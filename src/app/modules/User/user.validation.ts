@@ -13,6 +13,16 @@ const userValidationSchema = z.object({
     })
 })
 
+const userUpdateValidationSchema = z.object({
+    body: z.object({
+        name: z.string().optional(),
+        email: z.string().email().optional(),
+        phone: z.string().optional(),
+        role: z.enum(['admin', 'user']).optional(),
+        address: z.string().optional(),
+    })
+})
+
 const loginDataValidationSchema = z.object({
     body: z.object({
         email: z.string().email(),
@@ -24,4 +34,5 @@ const loginDataValidationSchema = z.object({
 export const UserValidation = {
     userValidationSchema,
     loginDataValidationSchema,
+    userUpdateValidationSchema,
 }

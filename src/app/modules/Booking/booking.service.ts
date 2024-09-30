@@ -185,7 +185,7 @@ const getPersonalBookingDataFromDB = async (email: string) => {
             path: 'slot',
             select: '-__v'
         },
-    ]);
+    ]).sort({ createdAt: 1 });
 
     return myBookings;
 }

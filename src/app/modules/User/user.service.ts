@@ -90,8 +90,34 @@ const getUserFromDB = async (token: string) => {
 }
 
 
+const updateUserToDB = async (token: string, updatableData: Partial<TUser>) => {
+
+    const decoded = jwt.verify(
+        token,
+        config.jwt_access_secret as string,
+    ) as JwtPayload;
+
+    const { email, role } = decoded;
+
+    const updatedUser = await User.findOneAndUpdate(
+        { email },
+        { $set: updatableData },
+        { new: true, runValidators: true }
+    ).select('-__v');
+
+    if (!updatedUser) {
+        throw new AppError(httpStatus.NOT_FOUND, 'User Not Found !');
+    };
+
+    return updatedUser;
+
+}
+
+
+
 export const UserServices = {
     createUserIntoDB,
     loginUser,
     getUserFromDB,
+    updateUserToDB,
 }
