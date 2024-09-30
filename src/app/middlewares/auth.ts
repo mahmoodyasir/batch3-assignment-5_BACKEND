@@ -33,11 +33,13 @@ const auth = (...requiredRoles: TUserRole[]) => {
             throw new AppError(httpStatus.NOT_FOUND, 'User Not Found !');
         }
 
-        if (requiredRoles && !requiredRoles.includes(role)) {
-            throw new AppError(
-                httpStatus.UNAUTHORIZED,
-                'NO ACCESS ! You are Not Authorized',
-            );
+        if (role !== 'admin') {
+            if (requiredRoles && !requiredRoles.includes(role)) {
+                throw new AppError(
+                    httpStatus.UNAUTHORIZED,
+                    'NO ACCESS ! You are Not Authorized',
+                );
+            }
         }
 
         req.user = decoded as JwtPayload;
