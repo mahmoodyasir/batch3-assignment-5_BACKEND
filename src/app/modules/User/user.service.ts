@@ -122,6 +122,21 @@ const getAllUserFromDB = async () => {
     return response;
 }
 
+const updateUserRoleIntoDB = async (id: string, role: string) => {
+
+    const updatedService = await User.findByIdAndUpdate(
+        id,
+        { $set: { role: role } },
+        { new: true, runValidators: true }
+    ).select('-__v');
+
+    if (!updatedService) {
+        throw new AppError(httpStatus.NOT_FOUND, 'User Not Found !');
+    };
+
+    return updatedService;
+}
+
 
 
 export const UserServices = {
@@ -130,4 +145,5 @@ export const UserServices = {
     getUserFromDB,
     updateUserToDB,
     getAllUserFromDB,
+    updateUserRoleIntoDB,
 }

@@ -25,6 +25,10 @@ router.get('/getAllUser',
     auth(USER_ROLE.admin),
     UserControllers.getAllUser);
 
+router.put('/updateRole/:id',
+    auth(USER_ROLE.admin),
+    UserControllers.updateUserRole);
+
 router.get('/fetchUser',
     UserControllers.getUser);
 
