@@ -117,7 +117,7 @@ const updateUserToDB = async (token: string, updatableData: Partial<TUser>) => {
 
 const getAllUserFromDB = async () => {
 
-    const response = await User.find();
+    const response = await User.find().sort({createdAt: -1});
 
     return response;
 }
