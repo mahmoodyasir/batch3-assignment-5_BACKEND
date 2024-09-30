@@ -6,6 +6,7 @@ import globalErrorHandler from './app/middlewares/globalErrorHandler';
 
 const app: Application = express();
 
+app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(cors());
 

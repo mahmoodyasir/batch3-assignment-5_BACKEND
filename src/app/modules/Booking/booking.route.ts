@@ -13,6 +13,9 @@ router.post('/',
     validateRequest(BookingValidation.bookingValidationSchema),
     BookingControllers.createServiceBooking);
 
+router.post('/process',
+    BookingControllers.responseFromSSLC);
+
 router.get('/',
     auth(USER_ROLE.admin),
     BookingControllers.getAllServiceBooking);
