@@ -82,16 +82,31 @@ const createSlotsIntoDB = async (payload: Partial<TSlot>) => {
 const getAvailableSlotsFromDB = async (filter: any) => {
 
     const availableSlots = await Slot.find(filter)
-    .populate({
-        path: 'service',
-        select: '-__v' 
-    });
+        .populate({
+            path: 'service',
+            select: '-__v'
+        }).sort({ createdAt: -1 });
 
     return availableSlots
+}
+
+const updateSloteStatusInDB = async (id: string, status_value: string) => {
+
+    const updatedSlot = Slot.findByIdAndUpdate(
+        id,
+        { $set: { isBooked: status_value } },
+        { new: true, runValidators: true }
+    ).populate({
+        path: 'service',
+        select: '-__v'
+    });
+
+    return updatedSlot;
 }
 
 
 export const SlotServices = {
     createSlotsIntoDB,
     getAvailableSlotsFromDB,
+    updateSloteStatusInDB,
 }

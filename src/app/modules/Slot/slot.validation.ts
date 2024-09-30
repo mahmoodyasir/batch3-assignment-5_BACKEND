@@ -28,7 +28,7 @@ const slotValidationSchema = z.object({
         date: dateStringSchema,
         startTime: timeStringSchema,
         endTime: timeStringSchema,
-        isBooked: z.enum(['available', 'booked', 'canceled']).optional(),
+        isBooked: z.enum(['available', 'booked', 'cancelled']).optional(),
     })
 });
 

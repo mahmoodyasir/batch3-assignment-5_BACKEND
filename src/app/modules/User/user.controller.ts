@@ -65,9 +65,25 @@ const updateUser = catchAsync(async (req, res) => {
 });
 
 
+const getAllUser = catchAsync(async (req, res) => {
+
+
+    const result = await UserServices.getAllUserFromDB();
+
+    sendResponse(res, {
+        statusCode: httpStatus.OK,
+        success: true,
+        message: "All User Retrieved successfully",
+        data: result
+    });
+
+});
+
+
 export const UserControllers = {
     userSignUp,
     userLogin,
     getUser,
     updateUser,
+    getAllUser,
 }

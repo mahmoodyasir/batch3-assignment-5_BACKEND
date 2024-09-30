@@ -115,9 +115,19 @@ const updateUserToDB = async (token: string, updatableData: Partial<TUser>) => {
 
 
 
+const getAllUserFromDB = async () => {
+
+    const response = await User.find();
+
+    return response;
+}
+
+
+
 export const UserServices = {
     createUserIntoDB,
     loginUser,
     getUserFromDB,
     updateUserToDB,
+    getAllUserFromDB,
 }
